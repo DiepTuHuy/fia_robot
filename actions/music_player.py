@@ -16,7 +16,7 @@ class MusicPlayer:
             
         self.current_file = None
         self.is_loop_mode = False
-        self.volume = 0.5  # Mặc định 50% (Giá trị từ 0.0 đến 1.0)
+        self.volume = 0.5  # Mặc định 50% (max 100%)
         
         # Cập nhật volume ngay khi khởi tạo
         try: pygame.mixer.music.set_volume(self.volume)

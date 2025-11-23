@@ -73,20 +73,17 @@ def conversation_flow():
                 if text_chunk:
                     sentence_buffer += text_chunk
                     
-                    # 1. LỆNH NHẠC
                     music_match = re.search(r"\[PLAY_MUSIC:(.*?)\]", sentence_buffer, re.IGNORECASE)
                     if music_match:
                         song_title = music_match.group(1).strip()
                         mouth.speak(f"Ok, mở bài {song_title}!")
                         sentence_buffer = ""
                         
-                        # ### FIX 2: Nếu mở bài mới thì không Resume bài cũ nữa
                         was_music_playing = False 
                         
                         music_player.play_song_from_youtube(song_title)
                         break 
 
-                    # 2. LỆNH LOOP
                     loop_match = re.search(r"\[LOOP:\s*(ON|OFF)\]", sentence_buffer, re.IGNORECASE)
                     if loop_match:
                         mode = loop_match.group(1).upper()
@@ -98,7 +95,6 @@ def conversation_flow():
                             music_player.set_loop(False)
                         sentence_buffer = re.sub(r"\[LOOP:.*?\]", "", sentence_buffer)
 
-                    # 3. LỆNH VOLUME
                     vol_match = re.search(r"\[VOL:\s*(.*?)\]", sentence_buffer, re.IGNORECASE)
                     if vol_match:
                         val = vol_match.group(1).strip().upper()
@@ -143,7 +139,6 @@ def conversation_flow():
         log("ERROR", f"Lỗi: {e}")    
     
     finally:
-        # ### FIX 3: Logic phát tiếp nhạc nằm ở đây
         if was_music_playing:
             log("BOT", "Tiếp tục phát nhạc...")
             music_player.unpause_music()
@@ -152,7 +147,6 @@ def conversation_flow():
         is_processing = False
 
 def run():
-    # ### FIX 4: Thêm was_music_playing vào global để ghi trạng thái
     global is_processing, global_modules, was_music_playing
     
     pygame.init()
@@ -229,10 +223,9 @@ def run():
                 if event.key == pygame.K_SPACE:
                     if is_processing: continue 
                     
-                    # ### FIX 5: CẬP NHẬT TRẠNG THÁI NHẠC TRƯỚC KHI PAUSE
                     if global_modules['music_player'].is_playing(): 
                         global_modules['music_player'].pause_music()
-                        was_music_playing = True # <-- QUAN TRỌNG: Đánh dấu là đang nghe dở
+                        was_music_playing = True 
                     else:
                         was_music_playing = False
                     
