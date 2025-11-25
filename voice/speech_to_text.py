@@ -20,7 +20,7 @@ class SpeechToText:
             with open(audio_filename, "rb") as file:
                 transcription = self.client.audio.transcriptions.create(
                 file=(audio_filename, file.read()),
-                model="gemini-2.5-flash",  # <--- Sửa ở đây
+                model="gemini-2.5-flash",
                 response_format="json",
                 language="vi", 
                 temperature=0.0

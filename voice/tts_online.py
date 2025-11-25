@@ -44,24 +44,22 @@ class TextToSpeechOnline:
             communicate = edge_tts.Communicate(text, VOICE, rate=RATE, pitch=PITCH)
             await communicate.save(filename)
 
-            # Phát âm thanh bằng pygame
             if os.path.exists(filename):
                 pygame.mixer.music.load(filename)
                 pygame.mixer.music.play()
                 
-                # Chờ đọc xong
                 while pygame.mixer.music.get_busy():
                     pygame.time.Clock().tick(10)
                 
                 # Dọn dẹp
                 pygame.mixer.music.unload()
-                # os.remove(filename)
+                os.remove(filename)
 
         except Exception as e:
             log("TTS", f"Online Error: {e}")
             
         finally:
-            self.speaking_status = False # Tắt cờ khi xong
+            self.speaking_status = False
             
     def _quick_speak_thread(self, text):
         try:

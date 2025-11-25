@@ -178,7 +178,7 @@ def run():
     global_modules['camera'] = FaceDetector()
     global_modules['camera'].start()
 
-    global_modules['mouth'].speak("Chào bạn! Giờ bạn có thể kéo mình đi chơi.")
+    global_modules['mouth'].speak("Chào bạn! Fia đã sẵn sàng.")
 
     running = True
     

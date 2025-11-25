@@ -30,7 +30,7 @@ class Brain:
         
     def _get_system_instruction(self):
         return (
-            "Bạn là Emo, robot AI dễ thương. Trả lời ngắn gọn (dưới 2 câu). "
+            "Bạn là Fia, robot AI dễ thương. Trả lời ngắn gọn (dưới 2 câu). "
             "QUAN TRỌNG: Phân tích ý định và đặt thẻ lệnh vào ĐẦU câu trả lời:\n"
             "1. Mở nhạc: [PLAY_MUSIC: Tên bài hát]\n"
             "2. Loop: [LOOP: ON] hoặc [LOOP: OFF]\n"

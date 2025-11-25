@@ -64,21 +64,15 @@ class TextToSpeech:
             await communicate.save(filename)
 
             if os.path.exists(filename):
-                # --- KHẮC PHỤC LỖI MẤT NHẠC TẠI ĐÂY ---
-                # Thay vì dùng mixer.music (kênh nhạc), ta dùng mixer.Sound (kênh hiệu ứng)
-                # Kênh này KHÔNG ghi đè lên bài hát đang Pause
                 
                 sound = pygame.mixer.Sound(filename)
                 
-                # Phát âm thanh trên một channel trống
                 channel = sound.play()
                 
-                # Chờ nói xong (quan trọng)
                 if channel:
                     while channel.get_busy():
                         pygame.time.Clock().tick(10)
                 
-                # Dọn dẹp
                 try:
                     os.remove(filename)
                 except:
